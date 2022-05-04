@@ -3,14 +3,16 @@
 #include "calander.hpp"
 
 int main(){
-    
-    Appointment first("Maria", 14, 30, 15, 40, 4, 2022,3);
-    Appointment second("Boris", 14, 30, 16, 00, 6, 2022,20);
-    Appointment third("Ivan", 14, 30, 15, 00, 6, 2022, 27);
+    //g++ main.cpp appointment.cpp calander.cpp
+    //./a.exe
+    Appointment first("Maria", 14, 30, 15, 40, 4, 2022,3,8);
+    Appointment second("Boris", 14, 30, 16, 00, 6, 2022,20,7);
+    Appointment third("Ivan", 14, 30, 15, 00, 6, 2022, 27,8);
 
-    //Appointment four;
+    Appointment four;
 
-    //std::cin >> four;
+    std::cin >> four;
+    std::cout<< four<<std::endl;
 
     std::ofstream appointmentList("appointmentList.txt");
     if (!appointmentList.is_open()) 
@@ -22,7 +24,7 @@ int main(){
     appointmentList << first<< '\n';
     appointmentList << second<< '\n';
     appointmentList << third<< '\n';
-    //appointmentList << four<< '\n';
+    appointmentList << four<< '\n';
     
     appointmentList.close();
     //first.print();
