@@ -3,3 +3,5 @@
 #include <cstring>
 #include <cassert>
 
+#include "appointment.hpp"
+
