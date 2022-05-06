@@ -23,5 +23,5 @@ public:
     friend std::istream& operator >>(std::istream& in, Calander &obj);
     void filterByDay(const int date, const int month, const int year);
     void chronologicalSortByHour();
-    void searchApointment(const char* name);
+    void searchApointment(const char* search);
 };

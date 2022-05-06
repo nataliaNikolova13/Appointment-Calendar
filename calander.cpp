@@ -162,3 +162,30 @@ void Calander::filterByDay(const int date, const int month, const int year)
     }
     appointmentsByDay.close();
 }
+
+void Calander::searchApointment(const char* search){
+    std::ofstream appointmentsSearchResult("appointmentsSearchResult.txt");
+    if (!appointmentsSearchResult.is_open())
+    {
+        std::cout << "Problem while opening the file - appointmentsSearchResult!";
+        return;
+    }
+    appointmentsSearchResult <<"Search result for "<<search<<std::endl;
+    bool foundMatch = false;
+    for(int i = 0; i<this->size; i++)
+    {
+        if(strstr(this->appointments[i].getName(),search)){
+            appointmentsSearchResult<<this->appointments[i]<< '\n';
+            foundMatch = true;
+        }
+        else if(strstr(this->appointments[i].getMessage(),search)){
+            appointmentsSearchResult<<this->appointments[i]<< '\n';
+            foundMatch = true;
+        }
+    }
+    if(foundMatch == false){
+        appointmentsSearchResult <<"Keyword not found"<<std::endl;
+    }
+
+    appointmentsSearchResult.close();
+}

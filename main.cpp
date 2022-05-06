@@ -63,6 +63,13 @@ int main(){
     calanderList.close();
 
     app.filterByDay(3,6,2022);
+
+    //да го оправя
+    std::cout<<"Enter keyword for search: "<<std::endl;
+    char search[100];
+    std::cin.getline(search, 100);
+    app.searchApointment(search);
+    //app.searchApointment("message");
     
     return 0;
 }

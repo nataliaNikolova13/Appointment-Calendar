@@ -1,5 +1,5 @@
 Appointments for 3.6.2022
-The name is: Peter, the date: 3 the time is: 10:30 - 15:0
-The name is: Mira, the date: 3 the time is: 13:30 - 15:0
-The name is: Alex, the date: 3 the time is: 14:30 - 15:0
-The name is: Maria, the date: 3 the time is: 15:30 - 15:40
+The name is: Peter, the date: 3.6.2022 the time is: 10:30 - 15:0 and message: message
+The name is: Mira, the date: 3.6.2022 the time is: 13:30 - 15:0 and message: message
+The name is: Alex, the date: 3.6.2022 the time is: 14:30 - 15:0 and message: message
+The name is: Maria, the date: 3.6.2022 the time is: 15:30 - 15:40 and message: message
