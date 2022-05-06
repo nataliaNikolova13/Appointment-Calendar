@@ -155,7 +155,7 @@ std::istream& operator>>(std::istream& in, Appointment &appointment){
         
     }
     std::ostream& operator<<(std::ostream& out, Appointment appointment){
-        out<<"The name is: "<<appointment.name<<" the time is: "<<appointment.startHour<<":"<<appointment.startMin<<" - "<<appointment.endHour<<":"<<appointment.endMin;
+        out<<"The name is: "<<appointment.name<<", the date: "<<appointment.date<<" the time is: "<<appointment.startHour<<":"<<appointment.startMin<<" - "<<appointment.endHour<<":"<<appointment.endMin;
         return out;
     }
 

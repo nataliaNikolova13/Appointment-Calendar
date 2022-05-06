@@ -90,6 +90,16 @@ Calander& Calander::operator +=(const Appointment& appointment)
     return *this;
 }
 
+Calander& Calander::operator -=(const char* name){
+    for(int i = 0; i<this->size; i++){
+        if(strcmp(name, this->appointments[i].getName()) == 0){
+            this->appointments[i] = this->appointments[this->size - 1];
+            --this->size;
+        }
+    }
+    return *this;
+}
+
 Calander::~Calander()
 {
     this->reallocate();
@@ -119,4 +129,36 @@ std::istream& operator >>(std::istream& in, Calander &obj)
     }
 
     return in;
+}
+
+//void Calander::chronologicalSort(const int startHour, const int startMin, const int date, const int month, const int year)
+void Calander::chronologicalSortByHour()
+{
+    for (int i = 0; i<size; i++){
+        for(int j = i + 1; j <size; j++){
+            if(this->appointments[j].getStartHour()<this->appointments[i].getStartHour()){
+                std::swap(this->appointments[j], this->appointments[i]);
+            }else if(this->appointments[j].getStartHour()==this->appointments[i].getStartHour() && (this->appointments[j].getStartMin()<this->appointments[i].getStartMin())){
+                std::swap(this->appointments[j], this->appointments[i]);
+            }
+        }
+    }
+    
+}
+
+void Calander::filterByDay(const int date, const int month, const int year)
+{
+    std::ofstream appointmentsByDay("appointmentsByDay.txt");
+    if (!appointmentsByDay.is_open())
+    {
+        std::cout << "Problem while opening the file - appointmentsByDay!";
+        return;
+    }
+    appointmentsByDay <<"Appointments for "<<date<<"."<<month<<"."<<year<<std::endl;
+    for(int i = 0; i<this->size; i++){
+        if(this->appointments[i].getDate() == date && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
+            appointmentsByDay << this->appointments[i]<< '\n';
+        }
+    }
+    appointmentsByDay.close();
 }
