@@ -5,13 +5,13 @@
 int main(){
     //g++ main.cpp appointment.cpp calander.cpp
     //./a.exe
-    Appointment first("Maria", 15, 30, 15, 40, 6, 2022,3,8);
-    Appointment second("Boris", 16, 30, 16, 00, 6, 2022,20,7);
-    Appointment third("Ivan", 14, 30, 15, 00, 6, 2022, 27,8);
-    Appointment five("Alex", 14, 30, 15, 00, 6, 2022, 3,8);
-    Appointment six("Niki", 17, 30, 15, 00, 6, 2022, 4,8);
-    Appointment seven("Peter", 10, 30, 15, 00, 6, 2022, 3,3);
-    Appointment eight("Mira", 13, 30, 15, 00, 6, 2022, 3,8);
+    Appointment first("Maria", 15, 30, 15, 40, 6, 2022,3,8,"message");
+    Appointment second("Boris", 16, 30, 16, 00, 6, 2022,20,7,"message");
+    Appointment third("Ivan", 14, 30, 15, 00, 6, 2022, 27,8,"message");
+    Appointment five("Alex", 14, 30, 15, 00, 6, 2022, 3,8,"message");
+    Appointment six("Niki", 17, 30, 15, 00, 6, 2022, 4,8,"message");
+    Appointment seven("Peter", 10, 30, 15, 00, 6, 2022, 3,3,"message");
+    Appointment eight("Mira", 13, 30, 15, 00, 6, 2022, 3,8,"message");
 
     //Appointment four;
 

@@ -22,9 +22,10 @@ Appointment::Appointment(){
         this->month = 0;
         this->year = 0;
         this->name = nullptr;
+        this->message = nullptr;
     }
 
-Appointment::Appointment(const char* name, int startHour, int startMin, int endHour, int endMin, int month, int year, int date, int endDate){
+Appointment::Appointment(const char* name, int startHour, int startMin, int endHour, int endMin, int month, int year, int date, int endDate, const char* message){
         this->setStartHour(startHour);
         this->setStartMin(startMin);
         this->setEndHour(endHour);
@@ -35,6 +36,7 @@ Appointment::Appointment(const char* name, int startHour, int startMin, int endH
         this->setName(name);
         this->setDate(date, month, year);
         this->setEndDate(endDate, date, month, year);
+        this->setMessage(message);
     }
 
 int Appointment::getStartHour() const
@@ -81,6 +83,11 @@ const char* Appointment::getName() const
 {
     return this->name;
 }    
+
+const char* Appointment::getMessage() const
+{
+    return this->message;
+} 
 
 void Appointment::setStartHour(const int startHour){
     assert(startHour>=0 && startHour<24);
@@ -139,6 +146,16 @@ void Appointment::setName(const char* name)
     strcpy(this->name,name);
 }
 
+void Appointment::setMessage(const char* message)
+{
+    this->message = new (std::nothrow) char[strlen(message) + 1];
+    if(!this->message){
+        std::cout<<"Problem"<<std::endl;
+        return;
+    }
+    strcpy(this->message,message);
+}
+
 std::istream& operator>>(std::istream& in, Appointment &appointment){
         std::cout<<"Enter name: "<<std::endl;
         char buffer[50] = {'\0',};
@@ -151,6 +168,11 @@ std::istream& operator>>(std::istream& in, Appointment &appointment){
         in >> appointment.endHour >> appointment.endMin;
         std::cout<<"Enter the start date, end date, month and year "<<std::endl;
         in >> appointment.date >> appointment.endDate >> appointment.month >> appointment.year;
+        std::cout<<"Enter message: "<<std::endl;
+        char arr[250] = {'\0',};
+        in>>arr;
+        appointment.message = new (std::nothrow) char[strlen(arr)+1];
+        strcpy(appointment.message,arr);
         return in;
         
     }
@@ -161,4 +183,5 @@ std::istream& operator>>(std::istream& in, Appointment &appointment){
 
     Appointment::~Appointment(){
         delete[] this->name;
+        delete[] this->message;
     }

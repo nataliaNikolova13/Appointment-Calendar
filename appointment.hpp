@@ -6,6 +6,7 @@
 class Appointment{
 private:
     char* name;
+    char* message;
     int startHour;
     int endHour;
     int startMin;
@@ -16,7 +17,7 @@ private:
     int endDate;
 public:    
     Appointment();
-    Appointment(const char* name, int startHour, int startMin, int endHour, int endMin, int month, int year, int date, int endDate);
+    Appointment(const char* name, int startHour, int startMin, int endHour, int endMin, int month, int year, int date, int endDate, const char* message);
     int getStartHour() const;
     int getEndHour() const;
     int getStartMin() const;
@@ -25,6 +26,7 @@ public:
     int getYear() const;
     int getDate() const;
     int getEndDate()const;
+    const char* getMessage() const;
     const char* getName() const;
     void setStartHour(const int startHour);
     void setStartMin(const int startMin);
@@ -35,6 +37,7 @@ public:
     void setDate(const int date, const int month, const int year);
     void setEndDate(const int endDate, const int date, const int month, const int year);
     void setName(const char* name);
+    void setMessage(const char* name);
     friend std::istream& operator>>(std::istream& in, Appointment &appointment);
     friend std::ostream& operator<<(std::ostream& out, Appointment appointment);
     ~Appointment();
