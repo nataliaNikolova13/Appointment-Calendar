@@ -40,5 +40,11 @@ public:
     void setMessage(const char* name);
     friend std::istream& operator>>(std::istream& in, Appointment &appointment);
     friend std::ostream& operator<<(std::ostream& out, Appointment appointment);
+    void changeName(const char* newName);
+    void changeStartHour(const int newStartHour);
+    void changeEndHout(const int newEndHour);
+    void changeMessage(const char* newMessage);
+    void changeStartDate(const int newStartDate);
+    void changeEndDate(const int newEndDate);
     ~Appointment();
 };

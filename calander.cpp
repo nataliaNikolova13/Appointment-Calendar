@@ -81,13 +81,57 @@ Calander& Calander::operator = (const Calander& other)
 
 Calander& Calander::operator +=(const Appointment& appointment)
 {
-    if (this->size == this->capacity)
+    bool isEmptyTime = true;
+    for(int i = 0; i<this->size; i++)
+    {
+        //if(this->appointments[i].getStartHour() == appointment.getStartHour())
+        if(this->appointments[i].getYear() == appointment.getYear() &&
+           this->appointments[i].getMonth() == appointment.getMonth() &&
+           this->appointments[i].getDate() == appointment.getDate())
+        {
+            /*int durationFirst = 0;
+            durationFirst = (this->appointments[i].getEndHour() - this->appointments[i].getStartHour())*60; 
+            if(this->appointments[i].getStartMin() < this->appointments[i].getEndMin()){
+                durationFirst = durationFirst + this->appointments[i].getEndMin() - this->appointments[i].getStartMin();
+            }else{
+                durationFirst = durationFirst + (60 - this->appointments[i].getStartMin() + this->appointments[i].getEndMin());
+            }*/
+
+            /*if(appointment.getStartHour() >= this->appointments[i].getStartHour() &&
+               appointment.getEndHour() <= this->appointments[i].getEndHour() &&
+               )
+            {*/
+
+            int stMin = 0;
+            stMin = this->appointments[i].getStartHour() * 60 + this->appointments[i].getStartMin();
+            int endMin = 0;
+            endMin = this->appointments[i].getEndHour() * 60 + this->appointments[i].getEndMin();
+
+            int new_stMin = 0;
+            new_stMin = appointment.getStartHour() * 60 + appointment.getStartMin();
+            int new_endMin = 0;
+            new_endMin = appointment.getEndHour() * 60 + appointment.getEndMin();
+
+            if(new_stMin >= stMin && new_stMin <endMin){
+                isEmptyTime = false;
+            }
+            }
+        
+    }
+
+    if(isEmptyTime == true){
+        if (this->size == this->capacity)
         {
             this->resize();
         }
     this->appointments[this->size] = appointment;
     ++this->size;
+    //return *this;
+    }//else{
+        //std::cout<<"There is already an appointment there"<<std::endl;
+    //}
     return *this;
+    
 }
 
 Calander& Calander::operator -=(const char* name){
@@ -189,3 +233,4 @@ void Calander::searchApointment(const char* search){
 
     appointmentsSearchResult.close();
 }
+

@@ -6,12 +6,12 @@ int main(){
     //g++ main.cpp appointment.cpp calander.cpp
     //./a.exe
     Appointment first("Maria", 15, 30, 15, 40, 6, 2022,3,8,"message");
-    Appointment second("Boris", 16, 30, 16, 00, 6, 2022,20,7,"message");
+    Appointment second("Boris", 15, 30, 16, 00, 6, 2022,3,7,"message");
     Appointment third("Ivan", 14, 30, 15, 00, 6, 2022, 27,8,"message");
-    Appointment five("Alex", 14, 30, 15, 00, 6, 2022, 3,8,"message");
-    Appointment six("Niki", 17, 30, 15, 00, 6, 2022, 4,8,"message");
-    Appointment seven("Peter", 10, 30, 15, 00, 6, 2022, 3,3,"message");
-    Appointment eight("Mira", 13, 30, 15, 00, 6, 2022, 3,8,"message");
+    //Appointment five("Alex", 14, 30, 15, 00, 6, 2022, 3,8,"message");
+    //Appointment six("Niki", 17, 30, 15, 00, 6, 2022, 4,8,"message");
+    //Appointment seven("Peter", 10, 30, 15, 00, 6, 2022, 3,3,"message");
+    //Appointment eight("Mira", 13, 30, 15, 00, 6, 2022, 3,8,"message");
 
     //Appointment four;
 
@@ -29,20 +29,23 @@ int main(){
     appointmentList << second<< '\n';
     appointmentList << third<< '\n';
     //appointmentList << four<< '\n';
-    appointmentList << five<< '\n';
-    appointmentList << six<< '\n';
-    appointmentList << seven<< '\n';
-    appointmentList << eight<< '\n';
+    //appointmentList << five<< '\n';
+    //appointmentList << six<< '\n';
+    //appointmentList << seven<< '\n';
+    //appointmentList << eight<< '\n';
+
+    first.changeName("New name");
+    second.changeMessage("new message");
 
     Calander app;
 
     app += first;
     app += second;
     app += third;
-    app += five;
-    app += six;
-    app += seven;
-    app += eight;
+    //app += five;
+    //app += six;
+    //app += seven;
+    //app += eight;
 
     app.chronologicalSortByHour();
 
@@ -64,12 +67,13 @@ int main(){
 
     app.filterByDay(3,6,2022);
 
+/*
     //да го оправя
     std::cout<<"Enter keyword for search: "<<std::endl;
     char search[100];
     std::cin.getline(search, 100);
     app.searchApointment(search);
     //app.searchApointment("message");
-    
+*/    
     return 0;
 }

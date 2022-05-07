@@ -24,4 +24,5 @@ public:
     void filterByDay(const int date, const int month, const int year);
     void chronologicalSortByHour();
     void searchApointment(const char* search);
+    
 };

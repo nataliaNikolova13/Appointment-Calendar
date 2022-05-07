@@ -1,2 +1,3 @@
-Search result for is
-The name is: Boris, the date: 20.6.2022 the time is: 16:30 - 16:0 and message: message
+Search result for new
+The name is: Boris, the date: 20.6.2022 the time is: 16:30 - 16:0 and message: new message
+The name is: new message, the date: 4.6.2022 the time is: 17:30 - 15:0 and message: message

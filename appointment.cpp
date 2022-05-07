@@ -146,6 +146,17 @@ void Appointment::setName(const char* name)
     strcpy(this->name,name);
 }
 
+void Appointment::changeName(const char* newName)
+{
+    delete[] this->name;
+    this->name = new (std::nothrow) char[strlen(name) + 1];
+    if(!this->name){
+        std::cout<<"Problem"<<std::endl;
+        return;
+    }
+    strcpy(this->name,newName);
+}
+
 void Appointment::setMessage(const char* message)
 {
     this->message = new (std::nothrow) char[strlen(message) + 1];
@@ -154,6 +165,17 @@ void Appointment::setMessage(const char* message)
         return;
     }
     strcpy(this->message,message);
+}
+
+void Appointment::changeMessage(const char* newMessage)
+{
+    delete[] this->message;
+    this->message = new (std::nothrow) char[strlen(message) + 1];
+    if(!this->message){
+        std::cout<<"Problem"<<std::endl;
+        return;
+    }
+    strcpy(this->message,newMessage);
 }
 
 std::istream& operator>>(std::istream& in, Appointment &appointment){
