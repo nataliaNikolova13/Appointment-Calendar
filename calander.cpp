@@ -234,3 +234,73 @@ void Calander::searchApointment(const char* search){
     appointmentsSearchResult.close();
 }
 
+void Calander::findLoad(const int startdate, const int enddate, const int year, const int month)
+{   
+    int count = 0;
+    int t = 0;
+    int tempArr[31][2];
+    for(int i = startdate; i <=enddate;i++)
+    {
+        for(int j = 0; j<this->size;j++){
+            if(this->appointments[j].getDate() == i && this->appointments[j].getMonth() == month 
+            && this->appointments[j].getYear()){
+                count++;
+        }}
+        //std::cout<<i<<" - "<<count<<std::endl;
+        
+        tempArr[t][1] = count;
+        tempArr[t][0] = i;
+        t++;
+        count = 0;
+    }
+
+    for(int j = 0; j<enddate - startdate+1;j++){
+        for(int m = j + 1; m <size; m++){
+            if(tempArr[m][1] > tempArr[j][1]){
+                std::swap(tempArr[m][0],tempArr[j][0]);
+                std::swap(tempArr[m][1],tempArr[j][1]);
+        }
+    }}
+    
+    //stats-YYYY-MM-DD.txt
+    //char name[21] = "stats-";
+    
+    //change the name of the file
+    std::ofstream stats("stats.txt");
+    if (!stats.is_open())
+    {
+        std::cout << "Problem while opening the file - stats!";
+        return;
+    }
+    stats <<"Statistics for the period "<<startdate<<"."<<month<<"."<<year<<" - "<<enddate<<"."<<month<<"."<<year<<std::endl;
+    for(int i = 0; i<enddate - startdate+1; i++){
+        //std::cout<<tempArr[j]<<std::endl;
+        stats <<"For the date "<<tempArr[i][0]<<" there are "<<tempArr[i][1]<<" appointments"<< '\n';
+        //if(this->appointments[i].getDate() == date && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
+            //stats << this->appointments[i]<< '\n';
+        //}
+    }
+    stats.close();
+    
+}
+
+    void Calander::findAvailability(const int startPeriod, const int endPeriod,const int year, const int month, const int startHourInterval,const int endHourInterval, const int startMinInterval,const int endMinInterval, const int duration)
+    {
+        int startTime = startHourInterval*60 + startMinInterval;
+        int endTime = endHourInterval * 60 + endMinInterval;
+        bool dayIsEmpty = true;
+
+        for(int j = 0; j<endPeriod-startPeriod;j++){
+            for(int i = 0; i<this->size; i++){
+                if(this->appointments[i].getDate() == j && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
+                dayIsEmpty = false;}}
+            if(dayIsEmpty == true){
+                std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at 10.00"<<std::endl;
+                break;
+            
+            dayIsEmpty = true;    
+        }
+    }
+    }
+
+

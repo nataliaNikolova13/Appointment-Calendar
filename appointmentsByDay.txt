@@ -1,2 +1,4 @@
 Appointments for 3.6.2022
+The name is: Peter, the date: 3.6.2022 the time is: 10:30 - 15:0 and message: message
+The name is: Alex, the date: 3.6.2022 the time is: 14:30 - 15:0 and message: message
 The name is: New name, the date: 3.6.2022 the time is: 15:30 - 15:40 and message: message

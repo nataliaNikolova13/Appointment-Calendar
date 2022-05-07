@@ -8,10 +8,10 @@ int main(){
     Appointment first("Maria", 15, 30, 15, 40, 6, 2022,3,8,"message");
     Appointment second("Boris", 15, 30, 16, 00, 6, 2022,3,7,"message");
     Appointment third("Ivan", 14, 30, 15, 00, 6, 2022, 27,8,"message");
-    //Appointment five("Alex", 14, 30, 15, 00, 6, 2022, 3,8,"message");
-    //Appointment six("Niki", 17, 30, 15, 00, 6, 2022, 4,8,"message");
-    //Appointment seven("Peter", 10, 30, 15, 00, 6, 2022, 3,3,"message");
-    //Appointment eight("Mira", 13, 30, 15, 00, 6, 2022, 3,8,"message");
+    Appointment five("Alex", 14, 30, 15, 00, 6, 2022, 3,8,"message");
+    Appointment six("Niki", 17, 30, 15, 00, 6, 2022, 4,8,"message");
+    Appointment seven("Peter", 10, 30, 15, 00, 6, 2022, 3,3,"message");
+    Appointment eight("Mira", 13, 30, 15, 00, 6, 2022, 3,8,"message");
 
     //Appointment four;
 
@@ -29,10 +29,10 @@ int main(){
     appointmentList << second<< '\n';
     appointmentList << third<< '\n';
     //appointmentList << four<< '\n';
-    //appointmentList << five<< '\n';
-    //appointmentList << six<< '\n';
-    //appointmentList << seven<< '\n';
-    //appointmentList << eight<< '\n';
+    appointmentList << five<< '\n';
+    appointmentList << six<< '\n';
+    appointmentList << seven<< '\n';
+    appointmentList << eight<< '\n';
 
     first.changeName("New name");
     second.changeMessage("new message");
@@ -42,10 +42,10 @@ int main(){
     app += first;
     app += second;
     app += third;
-    //app += five;
-    //app += six;
-    //app += seven;
-    //app += eight;
+    app += five;
+    app += six;
+    app += seven;
+    app += eight;
 
     app.chronologicalSortByHour();
 
@@ -75,5 +75,12 @@ int main(){
     app.searchApointment(search);
     //app.searchApointment("message");
 */    
+
+    app.findLoad(2, 4, 2022, 6);
+    //duration is in min
+    app.findAvailability(1, 9, 2022, 6, 10,17,0,0, 60);
+    
+
+
     return 0;
 }
