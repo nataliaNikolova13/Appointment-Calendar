@@ -151,8 +151,6 @@ Calander::~Calander()
 
 std::ostream& operator <<(std::ostream& out, const Calander &obj)
 {
-    //out << obj.size << '\n';
-
     for (int i = 0; i < obj.size; ++i)
     {
         out << obj.appointments[i] << '\n';
@@ -274,33 +272,62 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
     }
     stats <<"Statistics for the period "<<startdate<<"."<<month<<"."<<year<<" - "<<enddate<<"."<<month<<"."<<year<<std::endl;
     for(int i = 0; i<enddate - startdate+1; i++){
-        //std::cout<<tempArr[j]<<std::endl;
         stats <<"For the date "<<tempArr[i][0]<<" there are "<<tempArr[i][1]<<" appointments"<< '\n';
-        //if(this->appointments[i].getDate() == date && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
-            //stats << this->appointments[i]<< '\n';
-        //}
+        
     }
     stats.close();
     
 }
 
-    void Calander::findAvailability(const int startPeriod, const int endPeriod,const int year, const int month, const int startHourInterval,const int endHourInterval, const int startMinInterval,const int endMinInterval, const int duration)
+    bool Calander::findAvailability(const int startPeriod, const int endPeriod,const int year, const int month, const int startHourInterval,const int endHourInterval, const int startMinInterval,const int endMinInterval, const int duration)
     {
         int startTime = startHourInterval*60 + startMinInterval;
         int endTime = endHourInterval * 60 + endMinInterval;
         bool dayIsEmpty = true;
 
-        for(int j = 0; j<endPeriod-startPeriod;j++){
+        for(int j = 0; j<endPeriod-startPeriod+1;j++){
             for(int i = 0; i<this->size; i++){
-                if(this->appointments[i].getDate() == j && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
-                dayIsEmpty = false;}}
+                if(this->appointments[i].getDate() == startPeriod+j && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
+                dayIsEmpty = false;
+                //std::cout<<startPeriod+j<<std::endl;
+                }}
             if(dayIsEmpty == true){
-                std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at 10.00"<<std::endl;
-                break;
+                std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startHourInterval<<":"<<startMinInterval<<std::endl;
+                return true;;
             
-            dayIsEmpty = true;    
+            //dayIsEmpty = true;    
+        }
+        dayIsEmpty = true; 
+    }
+
+    for (int i = 0; i<size; i++){
+        for(int j = i + 1; j <size; j++){
+            if(this->appointments[j].getStartHour()<this->appointments[i].getStartHour()){
+                std::swap(this->appointments[j], this->appointments[i]);
+            }else if(this->appointments[j].getStartHour()==this->appointments[i].getStartHour() && (this->appointments[j].getStartMin()<this->appointments[i].getStartMin())){
+                std::swap(this->appointments[j], this->appointments[i]);
+            }
         }
     }
+        
+        for(int j = 0; j<endPeriod-startPeriod+1;j++){
+            for(int i = 0; i<this->size; i++){
+                if(this->appointments[i].getDate() == startPeriod+j && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
+                    if(startTime + duration < (this->appointments[i].getStartHour()*60 + this->appointments[i].getStartMin()))
+                    {
+                        std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startHourInterval<<":"<<startMinInterval<<std::endl;
+                        return true;
+                    }
+                    break;
+                }
+        
+
+
+            }
+    }
+
+    std::cout<<"There is no empty space in this period"<<std::endl;
+    return false;
     }
 
 

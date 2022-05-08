@@ -79,9 +79,9 @@ int main(){
 
     app.findLoad(2, 4, 2022, 6);
 
-    
+
     //duration is in min
-    app.findAvailability(1, 9, 2022, 6, 10,17,0,0, 60);
+    app.findAvailability(3, 9, 2022, 6, 10,17,0,0, 60);
     
 
 

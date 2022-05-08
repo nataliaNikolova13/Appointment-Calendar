@@ -25,5 +25,5 @@ public:
     void chronologicalSortByHour();
     void searchApointment(const char* search);
     void findLoad(const int startdate, const int enddate, const int year, const int month);
-    void findAvailability(const int startPeriod, const int endPeriod,const int year, const int month, const int startHourInterval,const int endHourInterval, const int startMinInterval,const int endMinInterval, const int duration);
+    bool findAvailability(const int startPeriod, const int endPeriod,const int year, const int month, const int startHourInterval,const int endHourInterval, const int startMinInterval,const int endMinInterval, const int duration);
 };
