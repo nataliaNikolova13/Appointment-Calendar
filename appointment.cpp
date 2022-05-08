@@ -11,10 +11,10 @@ bool isLeap(unsigned int year)
 {
     return (year % 4 == 0) && ((year % 400 == 0) || (year % 100 != 0));
 }
-//+крайна дата
+
 Appointment::Appointment(){
         this->date = 0;
-        this->endDate = 0;
+        //this->endDate = 0;
         this->startHour = 0;
         this->startMin = 0;
         this->endHour = 0;
@@ -25,7 +25,7 @@ Appointment::Appointment(){
         this->message = nullptr;
     }
 
-Appointment::Appointment(const char* name, int startHour, int startMin, int endHour, int endMin, int month, int year, int date, int endDate, const char* message){
+Appointment::Appointment(const char* name, int startHour, int startMin, int endHour, int endMin, int month, int year, int date, const char* message){
         this->setStartHour(startHour);
         this->setStartMin(startMin);
         this->setEndHour(endHour);
@@ -35,7 +35,7 @@ Appointment::Appointment(const char* name, int startHour, int startMin, int endH
         //this->setDuration(duration);
         this->setName(name);
         this->setDate(date, month, year);
-        this->setEndDate(endDate, date, month, year);
+        //this->setEndDate(endDate, date, month, year);
         this->setMessage(message);
     }
 
@@ -74,10 +74,10 @@ int Appointment::getDate() const
     return this->date;
 }
 
-int Appointment::getEndDate() const
+/*int Appointment::getEndDate() const
 {
     return this->endDate;
-}
+}*/
 
 const char* Appointment::getName() const
 {
@@ -130,12 +130,12 @@ void Appointment::setDate(const int date, const int month, const int year)
     this->date = date;
 }
 
-void Appointment::setEndDate(const int endDate, const int date, const int month, const int year){
+/*void Appointment::setEndDate(const int endDate, const int date, const int month, const int year){
     assert(endDate > 0 && (endDate <= MONTH_DAYS[month - 1]) + (month == 2 && isLeap(year)));
     //assert(endDate>=date);
     this->endDate = endDate;
 }
-
+*/
 void Appointment::setName(const char* name)
 {
     this->name = new (std::nothrow) char[strlen(name) + 1];
@@ -178,6 +178,26 @@ void Appointment::changeMessage(const char* newMessage)
     strcpy(this->message,newMessage);
 }
 
+void Appointment::changeStartHour(const int newStartHour, const int newStartMin)
+{
+    this->setStartHour(newStartHour);
+    this->setStartMin(newStartMin);
+}
+
+void Appointment::changeEndHour(const int newEndHour, const int newEndMin)
+{
+    this->setEndHour(newEndHour);
+    this->setEndMin(newEndMin);
+}
+
+void Appointment::changeDate(const int newDate, const int newMonth, const int newYear)
+{
+    this->setDate(newDate, newMonth, newYear);
+    this->setMonth(newMonth);
+    this->setYear(newYear);
+
+}
+
 std::istream& operator>>(std::istream& in, Appointment &appointment){
         std::cout<<"Enter name: "<<std::endl;
         char buffer[50] = {'\0',};
@@ -188,8 +208,8 @@ std::istream& operator>>(std::istream& in, Appointment &appointment){
         in >> appointment.startHour >> appointment.startMin;
         std::cout<<"Enter the end hour and min: "<<std::endl;
         in >> appointment.endHour >> appointment.endMin;
-        std::cout<<"Enter the start date, end date, month and year "<<std::endl;
-        in >> appointment.date >> appointment.endDate >> appointment.month >> appointment.year;
+        std::cout<<"Enter the start date, month and year "<<std::endl;
+        in >> appointment.date >> appointment.month >> appointment.year;
         std::cout<<"Enter message: "<<std::endl;
         char arr[250] = {'\0',};
         in>>arr;
