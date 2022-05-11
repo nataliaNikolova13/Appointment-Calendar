@@ -79,6 +79,7 @@ Calander& Calander::operator = (const Calander& other)
         return *this;
 }
 
+//да го оправя
 Calander& Calander::operator +=(const Appointment& appointment)
 {
     bool isEmptyTime = true;
@@ -114,6 +115,10 @@ Calander& Calander::operator +=(const Appointment& appointment)
 
             if(new_stMin >= stMin && new_stMin <endMin){
                 isEmptyTime = false;
+                //std::cout<<"date"<<appointment.getDate()<<appointment.getStartHour()<<appointment.getName()<<std::endl;
+            }else if(new_endMin <= stMin && new_endMin <endMin){
+                isEmptyTime = false;
+                //std::cout<<"date"<<appointment.getDate()<<appointment.getStartHour()<<appointment.getName()<<std::endl;
             }
             }
         
@@ -293,7 +298,7 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
                 }}
             if(dayIsEmpty == true){
                 std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startHourInterval<<":"<<startMinInterval<<std::endl;
-                return true;;
+                //return true;;
             
             //dayIsEmpty = true;    
         }
@@ -315,15 +320,18 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
                 if(this->appointments[i].getDate() == startPeriod+j && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
                     if(startTime + duration < (this->appointments[i].getStartHour()*60 + this->appointments[i].getStartMin()))
                     {
-                        std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startHourInterval<<":"<<startMinInterval<<std::endl;
-                        return true;
+                        std::cout<<startTime/60<<this->appointments[i].getDate()<<this->appointments[i].getStartHour() <<std::endl;
+                        std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startTime/60<<":"<<startTime%60<<std::endl;
+                        //std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startHourInterval<<":"<<startMinInterval<<std::endl;
+                        //return true;
                     }
-                    break;
+                    //startTime = this->appointments[i].getEndHour()*60 + this->appointments[i].getEndMin();
+                    //break;
                 }
-        
-
+                startTime = this->appointments[i].getEndHour()*60 + this->appointments[i].getEndMin();
 
             }
+            startTime = startHourInterval*60 + startMinInterval;
     }
 
     std::cout<<"There is no empty space in this period"<<std::endl;

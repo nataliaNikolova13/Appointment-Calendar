@@ -5,9 +5,9 @@
 #include <cassert>
 #include <cstring>
 
-const unsigned int MONTH_DAYS[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+const int MONTH_DAYS[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-bool isLeap(unsigned int year)
+bool isLeap(int year)
 {
     return (year % 4 == 0) && ((year % 400 == 0) || (year % 100 != 0));
 }
