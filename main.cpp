@@ -5,12 +5,12 @@
 void testProgramm()
 {
     //резервиране на часовя
-    Appointment first("Maria", 10, 30, 15, 40, 6, 2022,3,"message");
-    Appointment second("Boris", 15, 30, 16, 00, 6, 2022,3,"message");
-    Appointment third("Ivan", 14, 30, 15, 00, 6, 2022, 27,"message");
+    Appointment first("Maria", 10, 30, 15, 00, 6, 2022,3,"message");
+    Appointment second("Boris", 15, 30, 15, 40, 6, 2022,3,"message");
+    Appointment third("Ivan", 15, 30, 16, 00, 6, 2022, 4,"message");
     Appointment five("Alex", 14, 30, 15, 00, 6, 2022, 3,"message");
-    Appointment six("Niki", 11, 30, 14, 00, 6, 2022, 4,"message");
-    Appointment seven("Peter", 10, 30, 15, 00, 6, 2022, 3,"message");
+    Appointment six("Niki", 10, 30, 14, 00, 6, 2022, 4,"message");
+    Appointment seven("Peter", 17, 30, 18, 00, 6, 2022, 3,"message");
     Appointment eight("Mira", 16, 00, 16, 30, 6, 2022, 3,"message");
 
     //Appointment four;
@@ -36,7 +36,8 @@ void testProgramm()
 
     first.changeName("New name");
     second.changeMessage("new message");
-    third.changeDate(5,3,2022);
+    //third.changeDate(5,3,2022);
+    
 
     Calander app;
 
@@ -49,14 +50,16 @@ void testProgramm()
     app += six;
     app += seven;
     app += eight;
+    
+    //смяна на час
+    app -= first;
+    first.changeDate(5,7,2022);
+    app += first;
 
     app.chronologicalSortByHour();
 
     //махане на час по въведено име
-
     //app -= "Boris";
-
-    //appointmentList << app;
     
     appointmentList.close();
     //first.print();
@@ -86,7 +89,7 @@ void testProgramm()
 
 
     //duration is in min
-    app.findAvailability(3, 9, 2022, 6, 10,17,0,0, 60);
+    //app.findAvailability(1, 9, 2022, 6, 10,17,0,0, 60);
 }
 
 int main(){

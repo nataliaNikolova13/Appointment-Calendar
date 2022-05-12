@@ -79,13 +79,17 @@ Calander& Calander::operator = (const Calander& other)
         return *this;
 }
 
-//да го оправя
 Calander& Calander::operator +=(const Appointment& appointment)
 {
     bool isEmptyTime = true;
+    int new_stMin = 0;
+    new_stMin = appointment.getStartHour() * 60 + appointment.getStartMin();
+    int new_endMin = 0;
+    new_endMin = appointment.getEndHour() * 60 + appointment.getEndMin();
+    int stMin = 0;
+    int endMin = 0;
     for(int i = 0; i<this->size; i++)
     {
-        //if(this->appointments[i].getStartHour() == appointment.getStartHour())
         if(this->appointments[i].getYear() == appointment.getYear() &&
            this->appointments[i].getMonth() == appointment.getMonth() &&
            this->appointments[i].getDate() == appointment.getDate())
@@ -103,22 +107,20 @@ Calander& Calander::operator +=(const Appointment& appointment)
                )
             {*/
 
-            int stMin = 0;
+            
             stMin = this->appointments[i].getStartHour() * 60 + this->appointments[i].getStartMin();
-            int endMin = 0;
+           
             endMin = this->appointments[i].getEndHour() * 60 + this->appointments[i].getEndMin();
 
-            int new_stMin = 0;
-            new_stMin = appointment.getStartHour() * 60 + appointment.getStartMin();
-            int new_endMin = 0;
-            new_endMin = appointment.getEndHour() * 60 + appointment.getEndMin();
+            
 
             if(new_stMin >= stMin && new_stMin <endMin){
                 isEmptyTime = false;
-                //std::cout<<"date"<<appointment.getDate()<<appointment.getStartHour()<<appointment.getName()<<std::endl;
-            }else if(new_endMin <= stMin && new_endMin <endMin){
+                //std::cout<<"1date"<<appointment.getDate()<<appointment.getStartHour()<<appointment.getName()<<std::endl;
+            }else if(new_endMin >= stMin && new_endMin <endMin){
                 isEmptyTime = false;
-                //std::cout<<"date"<<appointment.getDate()<<appointment.getStartHour()<<appointment.getName()<<std::endl;
+                //std::cout<<stMin<<" - "<<new_stMin<<" - "<<endMin<<" - "<<new_endMin<<std::endl;
+                //std::cout<<"2date"<<appointment.getDate()<<appointment.getStartHour()<<appointment.getStartMin()<<appointment.getName()<<std::endl;
             }
             }
         
@@ -131,13 +133,13 @@ Calander& Calander::operator +=(const Appointment& appointment)
         }
     this->appointments[this->size] = appointment;
     ++this->size;
-    //return *this;
-    }//else{
-        //std::cout<<"There is already an appointment there"<<std::endl;
-    //}
+    }
     return *this;
     
 }
+
+
+
 
 Calander& Calander::operator -=(const char* name){
     for(int i = 0; i<this->size; i++){
@@ -149,22 +151,38 @@ Calander& Calander::operator -=(const char* name){
     return *this;
 }
 
+Calander& Calander::operator -=(const Appointment& appointment)
+{
+    for(int i = 0; i<this->size; i++){
+        if(this->appointments[i].getStartHour() == appointment.getStartHour() &&
+           this->appointments[i].getStartMin() == appointment.getStartMin() &&
+           this->appointments[i].getDate() == appointment.getDate() &&
+           this->appointments[i].getMonth() == appointment.getMonth() &&
+           this->appointments[i].getYear() == appointment.getYear())
+        {
+            this->appointments[i] = this->appointments[this->size - 1];
+             --this->size;
+        }
+    }
+    return *this;
+}
+
 Calander::~Calander()
 {
     this->reallocate();
 }
 
-std::ostream& operator <<(std::ostream& out, const Calander &obj)
+std::ostream& operator <<(std::ostream& out, const Calander &object)
 {
-    for (int i = 0; i < obj.size; ++i)
+    for (int i = 0; i < object.size; ++i)
     {
-        out << obj.appointments[i] << '\n';
+        out << object.appointments[i] << '\n';
     }
 
     return out;
 }
 
-std::istream& operator >>(std::istream& in, Calander &obj)
+std::istream& operator >>(std::istream& in, Calander &object)
 {
     int curSize;
     in >> curSize;
@@ -172,13 +190,12 @@ std::istream& operator >>(std::istream& in, Calander &obj)
     {
         Appointment temp;
         in >> temp;
-        obj += temp;
+        object += temp;
     }
 
     return in;
 }
 
-//void Calander::chronologicalSort(const int startHour, const int startMin, const int date, const int month, const int year)
 void Calander::chronologicalSortByHour()
 {
     for (int i = 0; i<size; i++){
@@ -249,7 +266,6 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
             && this->appointments[j].getYear()){
                 count++;
         }}
-        //std::cout<<i<<" - "<<count<<std::endl;
         
         tempArr[t][1] = count;
         tempArr[t][0] = i;
@@ -265,10 +281,6 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
         }
     }}
     
-    //stats-YYYY-MM-DD.txt
-    //char name[21] = "stats-";
-    
-    //change the name of the file
     std::ofstream stats("stats.txt");
     if (!stats.is_open())
     {
@@ -287,10 +299,12 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
     bool Calander::findAvailability(const int startPeriod, const int endPeriod,const int year, const int month, const int startHourInterval,const int endHourInterval, const int startMinInterval,const int endMinInterval, const int duration)
     {
         int startTime = startHourInterval*60 + startMinInterval;
+        std::cout<<startTime<<std::endl;
+
         int endTime = endHourInterval * 60 + endMinInterval;
         bool dayIsEmpty = true;
 
-        for(int j = 0; j<endPeriod-startPeriod+1;j++){
+        /*for(int j = 0; j<endPeriod-startPeriod+1;j++){
             for(int i = 0; i<this->size; i++){
                 if(this->appointments[i].getDate() == startPeriod+j && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
                 dayIsEmpty = false;
@@ -303,7 +317,7 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
             //dayIsEmpty = true;    
         }
         dayIsEmpty = true; 
-    }
+    }*/
 
     for (int i = 0; i<size; i++){
         for(int j = i + 1; j <size; j++){
@@ -315,20 +329,25 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
         }
     }
         
-        for(int j = 0; j<endPeriod-startPeriod+1;j++){
-            for(int i = 0; i<this->size; i++){
-                if(this->appointments[i].getDate() == startPeriod+j && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
+        for(int j = 0; j<endPeriod-startPeriod+1;j++)
+        {
+            for(int i = 0; i<this->size; i++)
+            {
+                if(this->appointments[i].getDate() == startPeriod+j && this->appointments[i].getMonth() == month && this->appointments[i].getYear())
+                {
+                    std::cout<<startPeriod+j<<"-"<<this->appointments[i].getStartHour()<<std::endl;
+                    std::cout<<startTime<<"-"<<this->appointments[i].getStartHour()*60 + this->appointments[i].getStartMin()<<std::endl;
                     if(startTime + duration < (this->appointments[i].getStartHour()*60 + this->appointments[i].getStartMin()))
                     {
-                        std::cout<<startTime/60<<this->appointments[i].getDate()<<this->appointments[i].getStartHour() <<std::endl;
+                        std::cout<<startTime/60<<"-"<<this->appointments[i].getDate()<<"-"<<this->appointments[i].getStartHour() <<std::endl;
                         std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startTime/60<<":"<<startTime%60<<std::endl;
                         //std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startHourInterval<<":"<<startMinInterval<<std::endl;
                         //return true;
                     }
-                    //startTime = this->appointments[i].getEndHour()*60 + this->appointments[i].getEndMin();
+                    startTime = this->appointments[i].getEndHour()*60 + this->appointments[i].getEndMin();
                     //break;
                 }
-                startTime = this->appointments[i].getEndHour()*60 + this->appointments[i].getEndMin();
+                //startTime = this->appointments[i].getEndHour()*60 + this->appointments[i].getEndMin();
 
             }
             startTime = startHourInterval*60 + startMinInterval;

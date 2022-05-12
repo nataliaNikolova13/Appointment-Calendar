@@ -1,20 +1,10 @@
-//#include <iostream>
-
 #include "appointment.hpp"
 
 #include <cassert>
 #include <cstring>
 
-const int MONTH_DAYS[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-bool isLeap(int year)
-{
-    return (year % 4 == 0) && ((year % 400 == 0) || (year % 100 != 0));
-}
-
 Appointment::Appointment(){
         this->date = 0;
-        //this->endDate = 0;
         this->startHour = 0;
         this->startMin = 0;
         this->endHour = 0;
@@ -32,10 +22,8 @@ Appointment::Appointment(const char* name, int startHour, int startMin, int endH
         this->setEndMin(endMin);
         this->setMonth(month);
         this->setYear(year);
-        //this->setDuration(duration);
         this->setName(name);
         this->setDate(date, month, year);
-        //this->setEndDate(endDate, date, month, year);
         this->setMessage(message);
     }
 
@@ -73,11 +61,6 @@ int Appointment::getDate() const
 {
     return this->date;
 }
-
-/*int Appointment::getEndDate() const
-{
-    return this->endDate;
-}*/
 
 const char* Appointment::getName() const
 {
@@ -126,16 +109,19 @@ void Appointment::setYear(const int year)
     
 void Appointment::setDate(const int date, const int month, const int year)
 {
-    assert(date > 0 && (date <= MONTH_DAYS[month - 1]) + (month == 2 && isLeap(year)));
+    int monthDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    if((year % 4 == 0) && ((year % 400 == 0) || (year % 100 != 0)))
+    {
+        assert(date > 0 && (date <= monthDays[month - 1]) + (month == 2));
+    }else{
+        assert(date > 0 && (date <= monthDays[month - 1]));
+    }
+
     this->date = date;
+
 }
 
-/*void Appointment::setEndDate(const int endDate, const int date, const int month, const int year){
-    assert(endDate > 0 && (endDate <= MONTH_DAYS[month - 1]) + (month == 2 && isLeap(year)));
-    //assert(endDate>=date);
-    this->endDate = endDate;
-}
-*/
 void Appointment::setName(const char* name)
 {
     this->name = new (std::nothrow) char[strlen(name) + 1];

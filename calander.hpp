@@ -19,8 +19,9 @@ public:
     Calander& operator = (const Calander& other);
     Calander& operator +=(const Appointment& appointment);
     Calander& operator -=(const char* name);
-    friend std::ostream& operator <<(std::ostream& out, const Calander &obj);
-    friend std::istream& operator >>(std::istream& in, Calander &obj);
+    Calander& operator -=(const Appointment& appointment);
+    friend std::ostream& operator <<(std::ostream& out, const Calander &object);
+    friend std::istream& operator >>(std::istream& in, Calander &object);
     void filterByDay(const int date, const int month, const int year);
     void chronologicalSortByHour();
     void searchApointment(const char* search);
