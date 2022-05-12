@@ -116,11 +116,8 @@ Calander& Calander::operator +=(const Appointment& appointment)
 
             if(new_stMin >= stMin && new_stMin <endMin){
                 isEmptyTime = false;
-                //std::cout<<"1date"<<appointment.getDate()<<appointment.getStartHour()<<appointment.getName()<<std::endl;
             }else if(new_endMin >= stMin && new_endMin <endMin){
                 isEmptyTime = false;
-                //std::cout<<stMin<<" - "<<new_stMin<<" - "<<endMin<<" - "<<new_endMin<<std::endl;
-                //std::cout<<"2date"<<appointment.getDate()<<appointment.getStartHour()<<appointment.getStartMin()<<appointment.getName()<<std::endl;
             }
             }
         
@@ -299,25 +296,22 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
     bool Calander::findAvailability(const int startPeriod, const int endPeriod,const int year, const int month, const int startHourInterval,const int endHourInterval, const int startMinInterval,const int endMinInterval, const int duration)
     {
         int startTime = startHourInterval*60 + startMinInterval;
-        std::cout<<startTime<<std::endl;
 
         int endTime = endHourInterval * 60 + endMinInterval;
         bool dayIsEmpty = true;
 
-        /*for(int j = 0; j<endPeriod-startPeriod+1;j++){
+        for(int j = 0; j<endPeriod-startPeriod+1;j++){
             for(int i = 0; i<this->size; i++){
                 if(this->appointments[i].getDate() == startPeriod+j && this->appointments[i].getMonth() == month && this->appointments[i].getYear()){
                 dayIsEmpty = false;
-                //std::cout<<startPeriod+j<<std::endl;
                 }}
             if(dayIsEmpty == true){
                 std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startHourInterval<<":"<<startMinInterval<<std::endl;
-                //return true;;
-            
-            //dayIsEmpty = true;    
+                return true;;
+                
         }
         dayIsEmpty = true; 
-    }*/
+    }
 
     for (int i = 0; i<size; i++){
         for(int j = i + 1; j <size; j++){
@@ -335,19 +329,13 @@ void Calander::findLoad(const int startdate, const int enddate, const int year, 
             {
                 if(this->appointments[i].getDate() == startPeriod+j && this->appointments[i].getMonth() == month && this->appointments[i].getYear())
                 {
-                    std::cout<<startPeriod+j<<"-"<<this->appointments[i].getStartHour()<<std::endl;
-                    std::cout<<startTime<<"-"<<this->appointments[i].getStartHour()*60 + this->appointments[i].getStartMin()<<std::endl;
                     if(startTime + duration < (this->appointments[i].getStartHour()*60 + this->appointments[i].getStartMin()))
                     {
-                        std::cout<<startTime/60<<"-"<<this->appointments[i].getDate()<<"-"<<this->appointments[i].getStartHour() <<std::endl;
                         std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startTime/60<<":"<<startTime%60<<std::endl;
-                        //std::cout<<"There is an empty space on "<<startPeriod+j<<"."<<month<<"."<<year<<" at "<<startHourInterval<<":"<<startMinInterval<<std::endl;
-                        //return true;
+                        return true;
                     }
                     startTime = this->appointments[i].getEndHour()*60 + this->appointments[i].getEndMin();
-                    //break;
                 }
-                //startTime = this->appointments[i].getEndHour()*60 + this->appointments[i].getEndMin();
 
             }
             startTime = startHourInterval*60 + startMinInterval;

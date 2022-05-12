@@ -73,7 +73,7 @@ void testProgramm()
     calanderList << app;
     calanderList.close();
 
-    app.filterByDay(3,6,2022);
+    app.filterByDay(4,6,2022);
 
 
     //търсене по ключова дума и извеждане на резултатите във файл
@@ -89,7 +89,7 @@ void testProgramm()
 
 
     //duration is in min
-    //app.findAvailability(1, 9, 2022, 6, 10,17,0,0, 60);
+    app.findAvailability(2, 6, 2022, 6, 10,17,0,0, 60);
 }
 
 int main(){
