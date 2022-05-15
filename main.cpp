@@ -4,11 +4,11 @@
 
 void testProgramm()
 {
-    //резервиране на часовя
+    //резервиране на часовe
     Appointment first("Maria", 10, 30, 15, 00, 6, 2022,3,"message");
     Appointment second("Boris", 15, 30, 15, 40, 6, 2022,3,"message");
     Appointment third("Ivan", 15, 30, 16, 00, 6, 2022, 4,"message");
-    Appointment five("Alex", 14, 30, 15, 00, 6, 2022, 3,"message");
+    Appointment five("Alex", 14, 30, 15, 00, 6, 2021, 3,"message");
     Appointment six("Niki", 10, 30, 14, 00, 6, 2022, 4,"message");
     Appointment seven("Peter", 17, 30, 18, 00, 6, 2022, 3,"message");
     Appointment eight("Mira", 16, 00, 16, 30, 6, 2022, 3,"message");
@@ -59,7 +59,7 @@ void testProgramm()
     app.chronologicalSortByHour();
 
     //махане на час по въведено име
-    //app -= "Boris";
+    app -= "Alex";
     
     appointmentList.close();
     //first.print();

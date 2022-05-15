@@ -1,6 +1,6 @@
 The name is: Niki, the date: 4.6.2022 the time is: 10:30 - 14:0 and message: message
 The name is: New name, the date: 5.7.2022 the time is: 10:30 - 15:0 and message: message
+The name is: new message, the date: 3.6.2022 the time is: 17:30 - 18:0 and message: message
+The name is: Ivan, the date: 4.6.2022 the time is: 15:30 - 16:0 and message: message
 The name is: Boris, the date: 3.6.2022 the time is: 15:30 - 15:40 and message: new message
-The name is: New name, the date: 4.6.2022 the time is: 15:30 - 16:0 and message: message
-The name is: Mira, the date: 3.6.2022 the time is: 16:0 - 16:30 and message: message
-The name is: Peter, the date: 3.6.2022 the time is: 17:30 - 18:0 and message: message
+The name is: New name, the date: 3.6.2022 the time is: 16:0 - 16:30 and message: message
